@@ -53,6 +53,7 @@ public class Client {
         System.out.println(stringResponse);
 
         */
+        // api to get information about a stock symbol
         {
             OkHttpClient client = new OkHttpClient();
 
@@ -68,6 +69,8 @@ public class Client {
             String stringResponse = body.string();
             System.out.println(stringResponse);
         }
+
+        // api to get prices of multiple days of a stock
         {
             OkHttpClient client = new OkHttpClient();
             String url = "https://alpha-vantage.p.rapidapi.com/query?function=TIME_SERIES_DAILY&outputsize=compact&datatype=json" + "&symbol=507685.BSE";
