@@ -44,7 +44,7 @@ public class Client {
                 .url("https://indianstockexchange.p.rapidapi.com/index.php?id=532540")
                 .get()
                 .addHeader("x-rapidapi-host", "indianstockexchange.p.rapidapi.com")
-                .addHeader("x-rapidapi-key", "038bef5886mshdfa9ad5c48e29eap18da81jsnbfb5bdb84b94")
+                .addHeader("x-rapidapi-key", "<<key>>")
                 .build();
 
         Response response = client.newCall(request).execute();
@@ -61,7 +61,7 @@ public class Client {
                     .url("https://twelve-data1.p.rapidapi.com/stocks?country=INDIA&symbol=TCS&format=json")
                     .get()
                     .addHeader("x-rapidapi-host", "twelve-data1.p.rapidapi.com")
-                    .addHeader("x-rapidapi-key", "038bef5886mshdfa9ad5c48e29eap18da81jsnbfb5bdb84b94")
+                    .addHeader("x-rapidapi-key", "<<key>>")
                     .build();
 
             Response response = client.newCall(request).execute();
@@ -78,7 +78,7 @@ public class Client {
                     .url(url)
                     .get()
                     .addHeader("x-rapidapi-host", "alpha-vantage.p.rapidapi.com")
-                    .addHeader("x-rapidapi-key", "038bef5886mshdfa9ad5c48e29eap18da81jsnbfb5bdb84b94")
+                    .addHeader("x-rapidapi-key", "<<key>>")
                     .build();
 
             Response response = client.newCall(request).execute();
@@ -95,9 +95,7 @@ public class Client {
         /*
         ApiClient defaultClient = Configuration.getDefaultApiClient();
         ApiKeyAuth auth = (ApiKeyAuth) defaultClient.getAuthentication("ApiKeyAuth");
-        auth.setApiKey("OmM1Njk5NzRkNGQwZDY1ZTg0NWIxODY0MDViMDY5MWYy");
-        //auth.setApiKey("OjJlMWIwN2IwZWJmOTQ5NmZjNjMyZjE1MGNmODRlOWQ5");
-        //auth.setApiKey("OjgwM2MzMzI1YmVhYjVmMWJhMzMwZmVjNWFlN2E4MDg1");//
+        auth.setApiKey("<<key>>");
         defaultClient.setAllowRetries(true);
 
         SecurityApi securityApi = new SecurityApi();
@@ -112,7 +110,7 @@ public class Client {
         /*
         ApiClient defaultClient = Configuration.getDefaultApiClient();
         ApiKeyAuth auth = (ApiKeyAuth) defaultClient.getAuthentication("ApiKeyAuth");
-        auth.setApiKey("OjJlMWIwN2IwZWJmOTQ5NmZjNjMyZjE1MGNmODRlOWQ5");
+        auth.setApiKey("<<key>>");
         defaultClient.setAllowRetries(true);
 
         StockExchangeApi stockExchangeApi = new StockExchangeApi();
