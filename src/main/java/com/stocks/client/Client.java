@@ -1,31 +1,11 @@
-import com.github.pnpninja.nsetools.NSETools;
-import com.github.pnpninja.nsetools.domain.IndexQuote;
+package com.stocks.client;
+
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 import com.squareup.okhttp.ResponseBody;
-import org.ta4j.core.*;
-import org.ta4j.core.analysis.criteria.ReturnOverMaxDrawdownCriterion;
-import org.ta4j.core.analysis.criteria.VersusBuyAndHoldCriterion;
-import org.ta4j.core.analysis.criteria.WinningPositionsRatioCriterion;
-import org.ta4j.core.analysis.criteria.pnl.GrossReturnCriterion;
-import org.ta4j.core.indicators.SMAIndicator;
-import org.ta4j.core.indicators.helpers.ClosePriceIndicator;
-import org.ta4j.core.num.Num;
-import org.ta4j.core.rules.CrossedDownIndicatorRule;
-import org.ta4j.core.rules.CrossedUpIndicatorRule;
-import org.ta4j.core.rules.StopGainRule;
-import org.ta4j.core.rules.StopLossRule;
-
-import ta4jexamples.loaders.CsvTradesLoader;
-
-import com.intrinio.api.*;
-import com.intrinio.models.*;
-import com.intrinio.invoker.*;
-import com.intrinio.invoker.auth.*;
-import org.threeten.bp.*;
-import java.math.BigDecimal;
-import java.util.*;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /*
     These apis are taken from
@@ -54,7 +34,7 @@ public class Client {
 
         */
         // api to get information about a stock symbol
-        {
+       /* {
             OkHttpClient client = new OkHttpClient();
 
             Request request = new Request.Builder()
@@ -68,7 +48,7 @@ public class Client {
             ResponseBody body = response.body();
             String stringResponse = body.string();
             System.out.println(stringResponse);
-        }
+        }*/
 
         // api to get prices of multiple days of a stock
         {
@@ -186,4 +166,5 @@ public class Client {
         AnalysisCriterion vsBuyAndHold = new VersusBuyAndHoldCriterion(new GrossReturnCriterion());
         System.out.println("Our return vs buy-and-hold return: " + vsBuyAndHold.calculate(series, tradingRecord));*/
     }
+
 }
