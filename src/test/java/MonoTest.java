@@ -26,6 +26,11 @@ public class MonoTest {
         Mono - is created for handling a single result.
         Flux - is created for handling multiple results (array, list etc). It will call subscribers for every single result one by one.
 
+        So, Mono and Flux can handle the event processing(result propagating) job in NON-BLOCKING way.
+
+        When you are calling external service, running thread of your service doesn't have to wait for the result.
+        You can just tell Mono/Flux for doing so and so whenever result arrives.
+        Spring has mixed the concept of CompletableFuture of Java 8 and RxJava's publisher/subscriber framework in one library.
          */
         {
             Mono<Integer> just = Mono.just(1).log();
