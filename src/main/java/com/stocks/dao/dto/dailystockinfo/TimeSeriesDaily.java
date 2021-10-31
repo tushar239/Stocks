@@ -12,7 +12,7 @@ public class TimeSeriesDaily {
     @JsonProperty("4. close")
     private Double the4Close;
     @JsonProperty("5. volume")
-    private Double the5Volume;
+    private Long the5Volume;
 
     public Double getThe1Open() {
         return the1Open;
@@ -46,11 +46,11 @@ public class TimeSeriesDaily {
         this.the4Close = value;
     }
 
-    public Double getThe5Volume() {
+    public Long getThe5Volume() {
         return the5Volume;
     }
 
-    public void setThe5Volume(Double value) {
+    public void setThe5Volume(Long value) {
         this.the5Volume = value;
     }
 

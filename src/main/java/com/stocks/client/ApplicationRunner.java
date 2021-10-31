@@ -3,6 +3,7 @@ package com.stocks.client;
 import com.stocks.config.Application;
 import com.stocks.dao.dto.dailystockinfo.StockDailyInformation;
 import com.stocks.service.DailyStockInformationLoaderService;
+import com.stocks.service.dto.StockInformation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -23,7 +24,7 @@ public class ApplicationRunner implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        StockDailyInformation stockDailyInformation = dailyStockInformationLoaderService.execute();
-        System.out.println(stockDailyInformation);
+        StockInformation stockInformation = dailyStockInformationLoaderService.execute();
+        System.out.println(stockInformation);
     }
 }
