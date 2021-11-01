@@ -32,6 +32,7 @@ public class MonoTest {
         You can just tell Mono/Flux for doing so and so whenever result arrives.
         Spring has mixed the concept of CompletableFuture of Java 8 and RxJava's publisher/subscriber framework in one library.
          */
+        //https://www.youtube.com/watch?v=ckfqcfzCg3w
         {
             Mono<Integer> just = Mono.just(1).log();
             // this subscribe method will internally create a Subscriber (of type LambdaMonoSubscriber), which keeps these codes as variables in it that needs to be called when onNext(), onError() and onCompletion() methods are called.
