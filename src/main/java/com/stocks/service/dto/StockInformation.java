@@ -1,8 +1,8 @@
 package com.stocks.service.dto;
 
-import com.stocks.dao.dto.Exchange;
-
-import java.util.*;
+import java.util.Date;
+import java.util.Objects;
+import java.util.SortedMap;
 
 public class StockInformation {
     private StockBasicInformation stockBasicInformation;

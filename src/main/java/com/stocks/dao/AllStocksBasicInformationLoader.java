@@ -24,6 +24,7 @@ public class AllStocksBasicInformationLoader implements IAllStocksBasicInformati
         this.path = path;
     }
 
+    // TODO: write some logic in such a way that external service is called just once for each company
     @Override
     public StocksBasicInformation load() {
         StocksBasicInformation stocksBasicInformation = new StocksBasicInformation();

@@ -1,6 +1,5 @@
 package com.stocks.service;
 
-import com.stocks.dao.DailyStockInformationLoader;
 import com.stocks.dao.IDailyStockInformationLoader;
 import com.stocks.dao.dto.Exchange;
 import com.stocks.dao.dto.dailystockinfo.StockDailyInformation;
@@ -12,10 +11,10 @@ import com.stocks.service.mapper.DailyStockInformationMapper;
 import java.util.List;
 import java.util.Optional;
 
-public class DailyStockInformationLoaderService implements IDailyStockInformationLoaderService {
+public class DailyStockInformationRetrieverService implements IDailyStockInformationRetrieverService {
     private IDailyStockInformationLoader dailyStockInformationLoader;
 
-    public DailyStockInformationLoaderService(IDailyStockInformationLoader dailyStockInformationLoader) {
+    public DailyStockInformationRetrieverService(IDailyStockInformationLoader dailyStockInformationLoader) {
         this.dailyStockInformationLoader = dailyStockInformationLoader;
     }
 

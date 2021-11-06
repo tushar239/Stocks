@@ -2,7 +2,7 @@ package com.stocks.client;
 
 import com.stocks.config.Application;
 import com.stocks.service.IAllStocksBasicInformationRetriever;
-import com.stocks.service.IDailyStockInformationLoaderService;
+import com.stocks.service.IDailyStockInformationRetrieverService;
 import com.stocks.service.dto.StockBasicInformation;
 import com.stocks.service.dto.StockInformation;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -25,8 +25,8 @@ public class ApplicationRunner implements CommandLineRunner {
     private IAllStocksBasicInformationRetriever allStocksBasicInformationRetriever;
 
     @Resource
-    @Qualifier("dailyStockInformationLoaderService")
-    private IDailyStockInformationLoaderService dailyStockInformationLoaderService;
+    @Qualifier("dailyStockInformationRetrieverService")
+    private IDailyStockInformationRetrieverService dailyStockInformationRetrieverService;
 
     public static void main(String[] args) {
         ConfigurableApplicationContext context = SpringApplication.run(ApplicationRunner.class, args);
@@ -38,7 +38,7 @@ public class ApplicationRunner implements CommandLineRunner {
         System.out.println(stocksBasicInformation);
 
         for (StockBasicInformation stockBasicInformation: stocksBasicInformation) {
-            Optional<StockInformation> stockInformation = dailyStockInformationLoaderService.execute(stockBasicInformation);
+            Optional<StockInformation> stockInformation = dailyStockInformationRetrieverService.execute(stockBasicInformation);
             stockInformation.ifPresent(si -> System.out.println(si));
         }
     }

@@ -6,6 +6,6 @@ import com.stocks.service.dto.StockInformation;
 
 import java.util.Optional;
 
-public interface IDailyStockInformationLoaderService {
+public interface IDailyStockInformationRetrieverService {
     Optional<StockInformation> execute(StockBasicInformation sbi);
 }
