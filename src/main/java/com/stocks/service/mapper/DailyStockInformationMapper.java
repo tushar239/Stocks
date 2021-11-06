@@ -22,8 +22,10 @@ public class DailyStockInformationMapper implements IStockInformationMapper {
 
         // TODO: create spring bean
         final StockValuesMapper stockValuesMapper = new StockValuesMapper();
-        timeSeriesDaily.entrySet().stream()
-                .forEach(entry -> stockValuesByDate.put(entry.getKey(), stockValuesMapper.map(entry.getValue())));
+        if(timeSeriesDaily != null) {
+            timeSeriesDaily.entrySet().stream()
+                    .forEach(entry -> stockValuesByDate.put(entry.getKey(), stockValuesMapper.map(entry.getValue())));
+        }
 
         stockInformation.setStockValues(stockValuesByDate);
 

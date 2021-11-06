@@ -5,6 +5,6 @@ import com.stocks.service.dto.StockInformation;
 
 import java.util.List;
 
-public interface IAllStockBasicInformationRetriever extends IBasicInformationRetriever<Object, StockBasicInformation>{
+public interface IAllStocksBasicInformationRetriever extends IBasicInformationRetriever<Object, StockBasicInformation>{
     List<StockBasicInformation> retrieveAll();
 }

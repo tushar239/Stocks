@@ -1,6 +1,7 @@
 package com.stocks.service;
 
 import com.stocks.dao.DailyStockInformationLoader;
+import com.stocks.dao.IDailyStockInformationLoader;
 import com.stocks.dao.dto.Exchange;
 import com.stocks.dao.dto.dailystockinfo.StockDailyInformation;
 import com.stocks.service.dto.StockBasicInformation;
@@ -12,9 +13,9 @@ import java.util.List;
 import java.util.Optional;
 
 public class DailyStockInformationLoaderService implements IDailyStockInformationLoaderService {
-    private DailyStockInformationLoader dailyStockInformationLoader;
+    private IDailyStockInformationLoader dailyStockInformationLoader;
 
-    public DailyStockInformationLoaderService(DailyStockInformationLoader dailyStockInformationLoader) {
+    public DailyStockInformationLoaderService(IDailyStockInformationLoader dailyStockInformationLoader) {
         this.dailyStockInformationLoader = dailyStockInformationLoader;
     }
 
@@ -45,10 +46,12 @@ public class DailyStockInformationLoaderService implements IDailyStockInformatio
         if(bseStockSymbol.isPresent()) {
             try {
                 stockDailyInformation = getStockDailyInformation(bseStockSymbol.get());
-            } catch (Exception e) {
-                if(nseStockSymbol.isPresent()) {
+                if(stockDailyInformation.getTimeSeriesDaily() == null) {
                     stockDailyInformation = getStockDailyInformation(nseStockSymbol.get());
                 }
+            } catch (Exception e) {
+                // TODO: convert it into ServiceException
+               throw new RuntimeException("Error while retrieving stock information from external service");
             }
         } else {
             if(nseStockSymbol.isPresent()) {
