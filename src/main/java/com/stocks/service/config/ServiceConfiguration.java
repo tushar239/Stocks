@@ -1,7 +1,7 @@
 package com.stocks.service.config;
 
 import com.stocks.dao.DailyStockInformationLoader;
-import com.stocks.dao.DaoConfiguration;
+import com.stocks.dao.config.DaoConfiguration;
 import com.stocks.service.DailyStockInformationLoaderService;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;

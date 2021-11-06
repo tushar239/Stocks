@@ -1,4 +1,4 @@
-package com.stocks.service;
+package com.stocks.service.mapper;
 
 import com.stocks.dao.dto.dailystockinfo.TimeSeriesDaily;
 import com.stocks.service.dto.StockValues;

@@ -6,7 +6,7 @@ import com.stocks.dao.dto.StockSymbols;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
-
+@Deprecated
 public interface IStockSymbolLoader {
     StockSymbols load(String companyName);
 }

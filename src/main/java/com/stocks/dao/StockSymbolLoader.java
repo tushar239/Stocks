@@ -14,6 +14,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Iterator;
 
+@Deprecated
 public class StockSymbolLoader implements IStockSymbolLoader {
 
     @Override

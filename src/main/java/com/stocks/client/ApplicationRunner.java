@@ -1,6 +1,8 @@
 package com.stocks.client;
 
 import com.stocks.config.Application;
+import com.stocks.dao.IAllStocksBasicInformationLoader;
+import com.stocks.dao.dto.StocksBasicInformation;
 import com.stocks.dao.dto.dailystockinfo.StockDailyInformation;
 import com.stocks.service.AllStockBasicInformationRetriever;
 import com.stocks.service.DailyStockInformationLoaderService;
@@ -22,6 +24,9 @@ import java.util.Optional;
 public class ApplicationRunner implements CommandLineRunner {
 
     @Autowired
+    IAllStocksBasicInformationLoader allStocksBasicInformationLoader;
+
+    @Autowired
     private DailyStockInformationLoaderService dailyStockInformationLoaderService;
 
     public static void main(String[] args) {
@@ -30,6 +35,9 @@ public class ApplicationRunner implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+        StocksBasicInformation stocks = allStocksBasicInformationLoader.load();
+        System.out.println(stocks);
+
         IAllStockBasicInformationRetriever allStockBasicInformationRetriever = new AllStockBasicInformationRetriever();
         final List<StockBasicInformation> stocksBasicInformation = allStockBasicInformationRetriever.retrieveAll();
         for (StockBasicInformation stockBasicInformation: stocksBasicInformation) {

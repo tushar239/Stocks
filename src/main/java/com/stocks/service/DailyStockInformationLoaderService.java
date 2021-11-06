@@ -6,6 +6,7 @@ import com.stocks.dao.dto.dailystockinfo.StockDailyInformation;
 import com.stocks.service.dto.StockBasicInformation;
 import com.stocks.service.dto.StockInformation;
 import com.stocks.service.dto.StockSymbol;
+import com.stocks.service.mapper.DailyStockInformationMapper;
 
 import java.util.List;
 import java.util.Optional;
