@@ -14,10 +14,7 @@ public class DailyStockInformationMapper implements IStockInformationMapper {
     @Override
     public StockInformation map(StockBasicInformation stockBasicInformation, StockDailyInformation stockDailyInformation) {
         StockInformation stockInformation = new StockInformation();
-        stockInformation.setSymbol(stockBasicInformation.getSymbol());
-        stockInformation.setExchange(stockBasicInformation.getExchange());
-        stockInformation.setName(stockBasicInformation.getName());
-
+        stockInformation.setStockBasicInformation(stockBasicInformation);
         stockInformation.setTimeFrame(TimeFrameEnum._DAY);
 
         Map<Date, TimeSeriesDaily> timeSeriesDaily = stockDailyInformation.getTimeSeriesDaily();

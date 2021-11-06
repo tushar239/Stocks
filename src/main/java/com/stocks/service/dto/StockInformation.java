@@ -5,36 +5,18 @@ import com.stocks.dao.dto.Exchange;
 import java.util.*;
 
 public class StockInformation {
-    private String symbol;
-    private String name;
-    private Exchange exchange;
+    private StockBasicInformation stockBasicInformation;
 
     private TimeFrameEnum timeFrame;
 
     private SortedMap<Date, StockValues> stockValues;
 
-    public Exchange getExchange() {
-        return exchange;
+    public StockBasicInformation getStockBasicInformation() {
+        return stockBasicInformation;
     }
 
-    public void setExchange(Exchange exchange) {
-        this.exchange = exchange;
-    }
-
-    public String getSymbol() {
-        return symbol;
-    }
-
-    public void setSymbol(String symbol) {
-        this.symbol = symbol;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    public void setStockBasicInformation(StockBasicInformation stockBasicInformation) {
+        this.stockBasicInformation = stockBasicInformation;
     }
 
     public TimeFrameEnum getTimeFrame() {
@@ -58,24 +40,20 @@ public class StockInformation {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         StockInformation that = (StockInformation) o;
-        return Objects.equals(symbol, that.symbol) &&
-                Objects.equals(name, that.name) &&
-                exchange == that.exchange &&
+        return Objects.equals(stockBasicInformation, that.stockBasicInformation) &&
                 timeFrame == that.timeFrame &&
                 Objects.equals(stockValues, that.stockValues);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(symbol, name, exchange, timeFrame, stockValues);
+        return Objects.hash(stockBasicInformation, timeFrame, stockValues);
     }
 
     @Override
     public String toString() {
         return "StockInformation{" +
-                "symbol='" + symbol + '\'' +
-                ", name='" + name + '\'' +
-                ", exchange=" + exchange +
+                "stockBasicInformation=" + stockBasicInformation +
                 ", timeFrame=" + timeFrame +
                 ", stockValues=" + stockValues +
                 '}';
