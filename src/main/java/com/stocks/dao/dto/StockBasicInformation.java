@@ -21,7 +21,9 @@ public class StockBasicInformation {
     private Double weeklyStopLoss3;
     private Double monthlyStopLoss3;
 
-    private Double demandZoneValue;
+    private Double dailyDemandZoneValue;
+    private Double weeklyDemandZoneValue;
+    private Double monthlyDemandZoneValue;
 
     private Double dailyTarget1;
     private Double weeklyTarget1;
@@ -39,7 +41,7 @@ public class StockBasicInformation {
 
     private Double quantity;
 
-    private String timeFrame;
+    private String timeFrames;
 
     private String comment1;
     private String comment2;
@@ -141,12 +143,28 @@ public class StockBasicInformation {
         this.monthlyStopLoss3 = monthlyStopLoss3;
     }
 
-    public Double getDemandZoneValue() {
-        return demandZoneValue;
+    public Double getDailyDemandZoneValue() {
+        return dailyDemandZoneValue;
     }
 
-    public void setDemandZoneValue(Double demandZoneValue) {
-        this.demandZoneValue = demandZoneValue;
+    public void setDailyDemandZoneValue(Double dailyDemandZoneValue) {
+        this.dailyDemandZoneValue = dailyDemandZoneValue;
+    }
+
+    public Double getWeeklyDemandZoneValue() {
+        return weeklyDemandZoneValue;
+    }
+
+    public void setWeeklyDemandZoneValue(Double weeklyDemandZoneValue) {
+        this.weeklyDemandZoneValue = weeklyDemandZoneValue;
+    }
+
+    public Double getMonthlyDemandZoneValue() {
+        return monthlyDemandZoneValue;
+    }
+
+    public void setMonthlyDemandZoneValue(Double monthlyDemandZoneValue) {
+        this.monthlyDemandZoneValue = monthlyDemandZoneValue;
     }
 
     public Double getDailyTarget1() {
@@ -237,12 +255,12 @@ public class StockBasicInformation {
         this.quantity = quantity;
     }
 
-    public String getTimeFrame() {
-        return timeFrame;
+    public String getTimeFrames() {
+        return timeFrames;
     }
 
-    public void setTimeFrame(String timeFrame) {
-        this.timeFrame = timeFrame;
+    public void setTimeFrames(String timeFrames) {
+        this.timeFrames = timeFrames;
     }
 
     public String getComment1() {
@@ -286,7 +304,9 @@ public class StockBasicInformation {
                 Objects.equals(dailyStopLoss3, that.dailyStopLoss3) &&
                 Objects.equals(weeklyStopLoss3, that.weeklyStopLoss3) &&
                 Objects.equals(monthlyStopLoss3, that.monthlyStopLoss3) &&
-                Objects.equals(demandZoneValue, that.demandZoneValue) &&
+                Objects.equals(dailyDemandZoneValue, that.dailyDemandZoneValue) &&
+                Objects.equals(weeklyDemandZoneValue, that.weeklyDemandZoneValue) &&
+                Objects.equals(monthlyDemandZoneValue, that.monthlyDemandZoneValue) &&
                 Objects.equals(dailyTarget1, that.dailyTarget1) &&
                 Objects.equals(weeklyTarget1, that.weeklyTarget1) &&
                 Objects.equals(monthlyTarget1, that.monthlyTarget1) &&
@@ -298,7 +318,7 @@ public class StockBasicInformation {
                 Objects.equals(monthlyTarget3, that.monthlyTarget3) &&
                 Objects.equals(purchaseDate, that.purchaseDate) &&
                 Objects.equals(quantity, that.quantity) &&
-                Objects.equals(timeFrame, that.timeFrame) &&
+                Objects.equals(timeFrames, that.timeFrames) &&
                 Objects.equals(comment1, that.comment1) &&
                 Objects.equals(comment2, that.comment2) &&
                 Objects.equals(buyingPrice, that.buyingPrice);
@@ -306,7 +326,7 @@ public class StockBasicInformation {
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, bseSymbol, nseSymbol, dailyStopLoss1, weeklyStopLoss1, monthlyStopLoss1, dailyStopLoss2, weeklyStopLoss2, monthlyStopLoss2, dailyStopLoss3, weeklyStopLoss3, monthlyStopLoss3, demandZoneValue, dailyTarget1, weeklyTarget1, monthlyTarget1, dailyTarget2, weeklyTarget2, monthlyTarget2, dailyTarget3, weeklyTarget3, monthlyTarget3, purchaseDate, quantity, timeFrame, comment1, comment2, buyingPrice);
+        return Objects.hash(name, bseSymbol, nseSymbol, dailyStopLoss1, weeklyStopLoss1, monthlyStopLoss1, dailyStopLoss2, weeklyStopLoss2, monthlyStopLoss2, dailyStopLoss3, weeklyStopLoss3, monthlyStopLoss3, dailyDemandZoneValue, weeklyDemandZoneValue, monthlyDemandZoneValue, weeklyTarget1, monthlyTarget1, dailyTarget2, weeklyTarget2, monthlyTarget2, dailyTarget3, weeklyTarget3, monthlyTarget3, purchaseDate, quantity, timeFrames, comment1, comment2, buyingPrice);
     }
 
     @Override
@@ -324,7 +344,9 @@ public class StockBasicInformation {
                 ", dailyStopLoss3=" + dailyStopLoss3 +
                 ", weeklyStopLoss3=" + weeklyStopLoss3 +
                 ", monthlyStopLoss3=" + monthlyStopLoss3 +
-                ", demandZoneValue=" + demandZoneValue +
+                ", dailyDemandZoneValue=" + dailyDemandZoneValue +
+                ", weeklyDemandZoneValue=" + weeklyDemandZoneValue +
+                ", monthlyDemandZoneValue=" + monthlyDemandZoneValue +
                 ", dailyTarget1=" + dailyTarget1 +
                 ", weeklyTarget1=" + weeklyTarget1 +
                 ", monthlyTarget1=" + monthlyTarget1 +
@@ -336,7 +358,7 @@ public class StockBasicInformation {
                 ", monthlyTarget3=" + monthlyTarget3 +
                 ", purchaseDate=" + purchaseDate +
                 ", quantity=" + quantity +
-                ", timeFrame='" + timeFrame + '\'' +
+                ", timeFrames='" + timeFrames + '\'' +
                 ", comment1='" + comment1 + '\'' +
                 ", comment2='" + comment2 + '\'' +
                 ", buyingPrice=" + buyingPrice +
