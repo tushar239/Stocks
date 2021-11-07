@@ -3,8 +3,8 @@ package com.stocks.client;
 import com.stocks.config.Application;
 import com.stocks.service.IAllStocksBasicInformationRetriever;
 import com.stocks.service.IDailyStockInformationRetrieverService;
-import com.stocks.service.dto.StockBasicInformation;
 import com.stocks.service.dto.StockInformation;
+import com.stocks.service.dto.StocksBasicInformation;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -13,7 +13,6 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Import;
 
 import javax.annotation.Resource;
-import java.util.List;
 import java.util.Optional;
 
 @SpringBootApplication
@@ -34,12 +33,15 @@ public class ApplicationRunner implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        final List<StockBasicInformation> stocksBasicInformation = allStocksBasicInformationRetriever.retrieveAll();
+        StocksBasicInformation stocksBasicInformation = allStocksBasicInformationRetriever.retrieveAll();
         System.out.println(stocksBasicInformation);
 
-        for (StockBasicInformation stockBasicInformation: stocksBasicInformation) {
-            Optional<StockInformation> stockInformation = dailyStockInformationRetrieverService.execute(stockBasicInformation);
+       /* StockSymbols stockSymbols = new StockSymbols();
+        stocksBasicInformation.getStream().forEach(stockBasicInformation -> stockSymbols.addAll(stockBasicInformation.getStockSymbols()));*/
+
+        stocksBasicInformation.getStream().forEach(stock -> {
+            Optional<StockInformation> stockInformation = dailyStockInformationRetrieverService.execute(stock);
             stockInformation.ifPresent(si -> System.out.println(si));
-        }
+        });
     }
 }

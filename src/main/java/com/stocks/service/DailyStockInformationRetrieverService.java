@@ -8,7 +8,7 @@ import com.stocks.service.dto.StockInformation;
 import com.stocks.service.dto.StockSymbol;
 import com.stocks.service.mapper.DailyStockInformationMapper;
 
-import java.util.List;
+import java.util.Collection;
 import java.util.Optional;
 
 public class DailyStockInformationRetrieverService implements IDailyStockInformationRetrieverService {
@@ -19,13 +19,13 @@ public class DailyStockInformationRetrieverService implements IDailyStockInforma
     }
 
     @Override
-    public Optional<StockInformation> execute(StockBasicInformation sbi) {
+    public Optional<StockInformation> execute(StockBasicInformation stockBasicInformation) {
 
         // TODO: create spring bean
         final DailyStockInformationMapper mapper = new DailyStockInformationMapper();
 
-        final Optional<StockDailyInformation> stockDailyInformation = getStockDailyInformation(sbi.getStockSymbols());
-        final Optional<StockInformation> stockInformation = stockDailyInformation.map(sdi -> mapper.map(sbi, sdi));
+        final Optional<StockDailyInformation> stockDailyInformation = getStockDailyInformation(stockBasicInformation.getStockSymbols());
+        final Optional<StockInformation> stockInformation = stockDailyInformation.map(sdi -> mapper.map(stockBasicInformation, sdi));
         return stockInformation;
     }
 
@@ -34,26 +34,26 @@ public class DailyStockInformationRetrieverService implements IDailyStockInforma
         return dailyStockInformationLoader.load("TIME_SERIES_DAILY_ADJUSTED", stockSymbol.getSymbol() + ".BSE");
     }
 
-    private Optional<StockDailyInformation> getStockDailyInformation(List<StockSymbol> stockSymbols) {
+    private Optional<StockDailyInformation> getStockDailyInformation(Collection<StockSymbol> stockSymbols) {
         StockDailyInformation stockDailyInformation = null;
 
-        IStockSymbolForAnExchangeRetriever<List<StockSymbol>, Exchange, StockSymbol> stockSymbolForAnExchangeRetriever = new StockSymbolForAnExchangeRetriever();
+        IStockSymbolForAnExchangeRetriever<Collection<StockSymbol>, Exchange, StockSymbol> stockSymbolForAnExchangeRetriever = new StockSymbolForAnExchangeRetriever();
 
-        Optional<StockSymbol> bseStockSymbol= stockSymbolForAnExchangeRetriever.retrieve(stockSymbols, Exchange.BSE);
-        Optional<StockSymbol> nseStockSymbol= stockSymbolForAnExchangeRetriever.retrieve(stockSymbols, Exchange.NSE);
+        Optional<StockSymbol> bseStockSymbol = stockSymbolForAnExchangeRetriever.retrieve(stockSymbols, Exchange.BSE);
+        Optional<StockSymbol> nseStockSymbol = stockSymbolForAnExchangeRetriever.retrieve(stockSymbols, Exchange.NSE);
 
-        if(bseStockSymbol.isPresent()) {
+        if (bseStockSymbol.isPresent()) {
             try {
                 stockDailyInformation = getStockDailyInformation(bseStockSymbol.get());
-                if(stockDailyInformation.getTimeSeriesDaily() == null) {
+                if (stockDailyInformation.getTimeSeriesDaily() == null) {
                     stockDailyInformation = getStockDailyInformation(nseStockSymbol.get());
                 }
             } catch (Exception e) {
                 // TODO: convert it into ServiceException
-               throw new RuntimeException("Error while retrieving stock information from external service");
+                throw new RuntimeException("Error while retrieving stock information from external service");
             }
         } else {
-            if(nseStockSymbol.isPresent()) {
+            if (nseStockSymbol.isPresent()) {
                 stockDailyInformation = getStockDailyInformation(nseStockSymbol.get());
             }
         }

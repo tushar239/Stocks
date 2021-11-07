@@ -2,6 +2,7 @@ package com.stocks.service;
 
 import com.stocks.dao.IAllStocksBasicInformationLoader;
 import com.stocks.dao.dto.Exchange;
+import com.stocks.service.dto.StocksBasicInformation;
 import com.stocks.service.dto.StockBasicInformation;
 import com.stocks.service.dto.StockSymbol;
 import org.apache.commons.lang3.StringUtils;
@@ -18,10 +19,12 @@ public class AllStocksBasicInformationRetriever implements IAllStocksBasicInform
     }
 
     @Override
-    public List<StockBasicInformation> retrieveAll() {
-        List<StockBasicInformation> stocksBasicInformation = new LinkedList<>();
+    public StocksBasicInformation retrieveAll() {
+
+        StocksBasicInformation stocksBasicInformation = new StocksBasicInformation();
 
         final List<com.stocks.dao.dto.StockBasicInformation> stocks = allStocksBasicInformationLoader.load().getStocks();
+
         for (com.stocks.dao.dto.StockBasicInformation stock : stocks) {
             StockBasicInformation stockBasicInformation = new StockBasicInformation();
 
