@@ -3,6 +3,7 @@ package com.stocks.client;
 import com.stocks.config.Application;
 import com.stocks.service.IAllStocksBasicInformationRetriever;
 import com.stocks.service.IDailyStockInformationRetrieverService;
+import com.stocks.service.IStocksBasicInformationAggregator;
 import com.stocks.service.dto.StockInformation;
 import com.stocks.service.dto.StocksBasicInformation;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -24,6 +25,10 @@ public class ApplicationRunner implements CommandLineRunner {
     private IAllStocksBasicInformationRetriever allStocksBasicInformationRetriever;
 
     @Resource
+    @Qualifier("stocksBasicInformationAggregator")
+    private IStocksBasicInformationAggregator<StocksBasicInformation> stocksBasicInformationAggregator;
+
+    @Resource
     @Qualifier("dailyStockInformationRetrieverService")
     private IDailyStockInformationRetrieverService dailyStockInformationRetrieverService;
 
@@ -33,13 +38,18 @@ public class ApplicationRunner implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+        // Information from orders.xlsx
         StocksBasicInformation stocksBasicInformation = allStocksBasicInformationRetriever.retrieveAll();
         System.out.println(stocksBasicInformation);
+
+        // Aggregating multiple StocksBasicInformation for the same stock in one StocksBasicInformation
+        StocksBasicInformation aggregatedStocksBasicInformation = stocksBasicInformationAggregator.aggregate(stocksBasicInformation);
 
        /* StockSymbols stockSymbols = new StockSymbols();
         stocksBasicInformation.getStream().forEach(stockBasicInformation -> stockSymbols.addAll(stockBasicInformation.getStockSymbols()));*/
 
-        stocksBasicInformation.getStream().forEach(stock -> {
+        // Information from external service that gives me prices of stocks
+        aggregatedStocksBasicInformation.getStream().forEach(stock -> {
             Optional<StockInformation> stockInformation = dailyStockInformationRetrieverService.execute(stock);
             stockInformation.ifPresent(si -> System.out.println(si));
         });
