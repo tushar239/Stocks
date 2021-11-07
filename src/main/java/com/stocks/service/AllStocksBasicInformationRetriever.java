@@ -2,12 +2,12 @@ package com.stocks.service;
 
 import com.stocks.dao.IAllStocksBasicInformationLoader;
 import com.stocks.dao.dto.Exchange;
-import com.stocks.service.dto.StocksBasicInformation;
 import com.stocks.service.dto.StockBasicInformation;
 import com.stocks.service.dto.StockSymbol;
+import com.stocks.service.dto.StockSymbols;
+import com.stocks.service.dto.StocksBasicInformation;
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.LinkedList;
 import java.util.List;
 
 public class AllStocksBasicInformationRetriever implements IAllStocksBasicInformationRetriever {
@@ -28,30 +28,17 @@ public class AllStocksBasicInformationRetriever implements IAllStocksBasicInform
         for (com.stocks.dao.dto.StockBasicInformation stock : stocks) {
             StockBasicInformation stockBasicInformation = new StockBasicInformation();
 
-            List<StockSymbol> stockSymbols = new LinkedList<>();
+            stockBasicInformation.setName(stock.getName());
 
-            final String bseSymbol = stock.getBseSymbol();
-            if(StringUtils.isNotEmpty(bseSymbol)) {
-                StockSymbol ss = new StockSymbol();
-                ss.setExchange(Exchange.BSE);
-                ss.setSymbol(bseSymbol);
-                stockSymbols.add(ss);
-            }
+            stockBasicInformation.setBuyingPrice(stock.getBuyingPrice() != null ? stock.getBuyingPrice() : 0);
+            stockBasicInformation.setQuantity(stock.getQuantity() != null ? stock.getQuantity() : 0);
 
-            final String nseSymbol = stock.getNseSymbol();
-            if(StringUtils.isNotEmpty(nseSymbol)) {
-                StockSymbol ss = new StockSymbol();
-                ss.setExchange(Exchange.NSE);
-                ss.setSymbol(nseSymbol);
-                stockSymbols.add(ss);
-            }
-
-            stockBasicInformation.setStockSymbols(stockSymbols);
+            StockSymbols stockSymbols = getStockSymbols(stock);
+            stockBasicInformation.addAllStockSymbols(stockSymbols.getStockSymbols());
 
             stocksBasicInformation.add(stockBasicInformation);
         }
 
-        // TODO: write code to retrieve basic information Orders.xls
         /*StockBasicInformation sbi1 = new StockBasicInformation();
         StockSymbol ss1 = new StockSymbol();
         ss1.setExchange(Exchange.BSE);
@@ -66,5 +53,28 @@ public class AllStocksBasicInformationRetriever implements IAllStocksBasicInform
         List<StockBasicInformation> stocksBasicInformation = List.of(sbi1);*/
 
         return stocksBasicInformation;
+    }
+
+    // TODO: put it in another class
+    private StockSymbols getStockSymbols(com.stocks.dao.dto.StockBasicInformation stock) {
+        StockSymbols stockSymbols = new StockSymbols();
+
+        final String bseSymbol = stock.getBseSymbol();
+        if (StringUtils.isNotEmpty(bseSymbol)) {
+            StockSymbol stockSymbol = new StockSymbol();
+            stockSymbol.setExchange(Exchange.BSE);
+            stockSymbol.setSymbol(bseSymbol);
+            stockSymbols.add(stockSymbol);
+        }
+
+        final String nseSymbol = stock.getNseSymbol();
+        if (StringUtils.isNotEmpty(nseSymbol)) {
+            StockSymbol stockSymbol = new StockSymbol();
+            stockSymbol.setExchange(Exchange.NSE);
+            stockSymbol.setSymbol(nseSymbol);
+            stockSymbols.add(stockSymbol);
+        }
+
+        return stockSymbols;
     }
 }

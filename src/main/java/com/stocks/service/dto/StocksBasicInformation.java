@@ -14,11 +14,11 @@ public class StocksBasicInformation {
     }
 
     public void add(StockBasicInformation stock) {
-        stocks.add(stock);
+        this.stocks.add(stock);
     }
 
     public void addAll(Collection<StockBasicInformation> stocks) {
-        stocks.addAll(stocks);
+        this.stocks.addAll(stocks);
     }
 
     public Stream<StockBasicInformation> getStream() {

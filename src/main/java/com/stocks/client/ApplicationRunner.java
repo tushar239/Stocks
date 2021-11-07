@@ -40,15 +40,14 @@ public class ApplicationRunner implements CommandLineRunner {
     public void run(String... args) throws Exception {
         // Information from orders.xlsx
         StocksBasicInformation stocksBasicInformation = allStocksBasicInformationRetriever.retrieveAll();
-        System.out.println(stocksBasicInformation);
+        System.out.println("Stocks from orders.xlsx: " + stocksBasicInformation);
 
         // Aggregating multiple StocksBasicInformation for the same stock in one StocksBasicInformation
         StocksBasicInformation aggregatedStocksBasicInformation = stocksBasicInformationAggregator.aggregate(stocksBasicInformation);
-
-       /* StockSymbols stockSymbols = new StockSymbols();
-        stocksBasicInformation.getStream().forEach(stockBasicInformation -> stockSymbols.addAll(stockBasicInformation.getStockSymbols()));*/
+        System.out.println("Aggregated Stocks from orders.xlsx: "+aggregatedStocksBasicInformation);
 
         // Information from external service that gives me prices of stocks
+        System.out.println("Stocks with Prices: ");
         aggregatedStocksBasicInformation.getStream().forEach(stock -> {
             Optional<StockInformation> stockInformation = dailyStockInformationRetrieverService.execute(stock);
             stockInformation.ifPresent(si -> System.out.println(si));

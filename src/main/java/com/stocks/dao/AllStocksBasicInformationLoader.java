@@ -3,16 +3,13 @@ package com.stocks.dao;
 import com.stocks.dao.dto.StockBasicInformation;
 import com.stocks.dao.dto.StocksBasicInformation;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 import java.util.Date;
 import java.util.Iterator;
 
@@ -29,8 +26,11 @@ public class AllStocksBasicInformationLoader implements IAllStocksBasicInformati
     public StocksBasicInformation load() {
         StocksBasicInformation stocksBasicInformation = new StocksBasicInformation();
 
+        InputStream inputStream = null;
         try {
-            XSSFWorkbook wb = new XSSFWorkbook(new File(path));
+            inputStream = new FileInputStream(new File(path));
+
+            XSSFWorkbook wb = new XSSFWorkbook(inputStream);
             XSSFSheet sheet = wb.getSheetAt(0);
 
             //FormulaEvaluator formulaEvaluator = wb.getCreationHelper().createFormulaEvaluator();
@@ -53,7 +53,7 @@ public class AllStocksBasicInformationLoader implements IAllStocksBasicInformati
                 } else {
                     Double bseSymbol = getNumericCellValue(cell1);
                     if (bseSymbol != null) {
-                        stockBasicInformation.setBseSymbol(""+bseSymbol.intValue());
+                        stockBasicInformation.setBseSymbol("" + bseSymbol.intValue());
                     }
                 }
 
@@ -133,9 +133,12 @@ public class AllStocksBasicInformationLoader implements IAllStocksBasicInformati
         } catch (IOException e) {
             // TODO: convert into DaoException
             throw new RuntimeException("exception while file operation");
-        } catch (InvalidFormatException e) {
-            // TODO: convert into DaoException
-            throw new RuntimeException("exception while file operation");
+        } finally {
+            try {
+                inputStream.close();
+            } catch (IOException e) {
+                throw new RuntimeException("exception while closing file input stream");
+            }
         }
         return stocksBasicInformation;
     }

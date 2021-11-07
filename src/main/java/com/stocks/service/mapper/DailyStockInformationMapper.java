@@ -29,6 +29,8 @@ public class DailyStockInformationMapper implements IStockInformationMapper {
 
         stockInformation.setStockValues(stockValuesByDate);
 
+        // TODO: set targets, stop losses, comments, demand zones
+
         return stockInformation;
     }
 }

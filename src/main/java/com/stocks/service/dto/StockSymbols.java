@@ -6,18 +6,14 @@ import java.util.Objects;
 import java.util.Set;
 
 public class StockSymbols {
-    private Set<StockSymbol> stockSymbols;
-
-    public StockSymbols() {
-        this.stockSymbols = new HashSet<>();
-    }
+    private Set<StockSymbol> stockSymbols = new HashSet<>();
 
     public void add(StockSymbol stockSymbol) {
-        stockSymbols.add(stockSymbol);
+        this.stockSymbols.add(stockSymbol);
     }
 
     public void addAll(Collection<StockSymbol> stockSymbols) {
-        stockSymbols.addAll(stockSymbols);
+        this.stockSymbols.addAll(stockSymbols);
     }
 
     public Set<StockSymbol> getStockSymbols() {
